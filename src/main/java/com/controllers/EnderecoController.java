@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Endereco;
+import com.model.vo.EnderecoVO;
 import com.services.EnderecoServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class EnderecoController {
 	EnderecoServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Endereco findById(@PathVariable(value = "id") Long id) {
+	public EnderecoVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Endereco> findAll() {
+	public List<EnderecoVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Endereco create(Endereco endereco) {
+	public EnderecoVO create(EnderecoVO endereco) {
 		return service.create(endereco);
 	}
 	
 	@PutMapping
-	public Endereco update(Endereco endereco) {
-		return service.create(endereco);
+	public EnderecoVO update(EnderecoVO endereco) {
+		return service.update(endereco);
 	}
 	
 	@DeleteMapping(value = "/{id}")

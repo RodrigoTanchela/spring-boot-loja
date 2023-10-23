@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Marca;
+import com.model.vo.MarcaVO;
 import com.services.MarcaServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class MarcaController {
 	MarcaServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Marca findById(@PathVariable(value = "id") Long id) {
+	public MarcaVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Marca> findAll() {
+	public List<MarcaVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Marca create(Marca marca) {
+	public MarcaVO create(MarcaVO marca) {
 		return service.create(marca);
 	}
 	
 	@PutMapping
-	public Marca update(Marca marca) {
-		return service.create(marca);
+	public MarcaVO update(MarcaVO marca) {
+		return service.update(marca);
 	}
 	
 	@DeleteMapping(value = "/{id}")

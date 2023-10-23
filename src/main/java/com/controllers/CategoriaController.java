@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Categoria;
+import com.model.vo.CategoriaVO;
 import com.services.CategoriaServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class CategoriaController {
 	CategoriaServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Categoria findById(@PathVariable(value = "id") Long id) {
+	public CategoriaVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Categoria> findAll() {
+	public List<CategoriaVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Categoria create(Categoria categoria) {
+	public CategoriaVO create(CategoriaVO categoria) {
 		return service.create(categoria);
 	}
 	
 	@PutMapping
-	public Categoria update(Categoria categoria) {
-		return service.create(categoria);
+	public CategoriaVO update(CategoriaVO categoria) {
+		return service.update(categoria);
 	}
 	
 	@DeleteMapping(value = "/{id}")

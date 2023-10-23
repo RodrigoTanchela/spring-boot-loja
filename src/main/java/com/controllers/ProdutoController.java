@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Produto;
+import com.model.vo.ProdutoVO;
 import com.services.ProdutoServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class ProdutoController {
 	ProdutoServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Produto findById(@PathVariable(value = "id") Long id) {
+	public ProdutoVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Produto> findAll() {
+	public List<ProdutoVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Produto create(Produto produto) {
+	public ProdutoVO create(ProdutoVO produto) {
 		return service.create(produto);
 	}
 	
 	@PutMapping
-	public Produto update(Produto produto) {
-		return service.create(produto);
+	public ProdutoVO update(ProdutoVO produto) {
+		return service.update(produto);
 	}
 	
 	@DeleteMapping(value = "/{id}")

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Estado;
+import com.model.vo.EstadoVO;
 import com.services.EstadoServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class EstadoController {
 	EstadoServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Estado findById(@PathVariable(value = "id") Long id) {
+	public EstadoVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Estado> findAll() {
+	public List<EstadoVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Estado create(Estado estado) {
+	public EstadoVO create(EstadoVO estado) {
 		return service.create(estado);
 	}
 	
 	@PutMapping
-	public Estado update(Estado estado) {
-		return service.create(estado);
+	public EstadoVO update(EstadoVO estado) {
+		return service.update(estado);
 	}
 	
 	@DeleteMapping(value = "/{id}")

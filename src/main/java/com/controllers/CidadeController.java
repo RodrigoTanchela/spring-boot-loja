@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.Cidade;
+import com.model.vo.CidadeVO;
 import com.services.CidadeServices;
 
 @RestController
@@ -23,23 +23,23 @@ public class CidadeController {
 	CidadeServices service;
 	
 	@GetMapping(value = "/{id}")
-	public Cidade findById(@PathVariable(value = "id") Long id) {
+	public CidadeVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping
-	public List<Cidade> findAll() {
+	public List<CidadeVO> findAll() {
 		return service.findAll();
 	}
 	
 	@PostMapping
-	public Cidade create(Cidade cidade) {
+	public CidadeVO create(CidadeVO cidade) {
 		return service.create(cidade);
 	}
 	
 	@PutMapping
-	public Cidade update(Cidade cidade) {
-		return service.create(cidade);
+	public CidadeVO update(CidadeVO cidade) {
+		return service.update(cidade);
 	}
 	
 	@DeleteMapping(value = "/{id}")

@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.excpetions.ResourceNotFoundException;
+import com.mapper.DozerMapper;
 import com.model.Categoria;
 import com.repository.CategoriaRepository;
+import com.model.vo.CategoriaVO;
+
 
 
 @Service
@@ -19,26 +22,33 @@ public class CategoriaServices {
 	@Autowired
 	private CategoriaRepository repository;
 	
-	public Categoria findById(Long id) {
-		logger.info("Buscando um categoria");
-		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+	public List<CategoriaVO> findAll() {
+		logger.info("Finding all people");
+		var categorias =  DozerMapper.parseListObject(repository.findAll(), CategoriaVO.class);
+		return categorias;
+	}
+
+	public CategoriaVO findById(Long id) {
+		logger.info("Finding one categoria!");
+		
+		var entity = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records Found for this Id"));
+		var vo = DozerMapper.parseObject(entity, CategoriaVO.class);
+		return vo;
 	}
 	
-	public List<Categoria> findAll() {
-		logger.info("Buscando categorias cadastrados");
-		return repository.findAll();
+	public CategoriaVO create(CategoriaVO categoria) {
+		logger.info("Creating one categoria!");
+		var entity = DozerMapper.parseObject(categoria, Categoria.class);
+		var vo = DozerMapper.parseObject(repository.save(entity), CategoriaVO.class);
+		return vo;
 	}
 	
-	public Categoria create(Categoria categoria) {
-		logger.info("Criando um categoria");
-		return repository.saveAndFlush(categoria);
-	}
-	
-	public Categoria update(Categoria categoria) {
-		logger.info("Alterando um categoria");
-		Categoria entity = repository.findById(categoria.getId()).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+	public CategoriaVO update(CategoriaVO categoria) {
+		logger.info("Alterando uma categoria");
+		var entity = repository.findById(categoria.getKey()).orElseThrow(() -> new ResourceNotFoundException("Not found"));
 		entity.setNome(categoria.getNome());
-		return repository.saveAndFlush(entity);
+		var vo = DozerMapper.parseObject(repository.save(entity), CategoriaVO.class);
+		return vo;
 	}
 	
 	public void delete(Long id) {
